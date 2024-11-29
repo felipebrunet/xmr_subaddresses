@@ -5,7 +5,12 @@ import nacl.bindings
 import monero.base58 as base58
 import os
 
-keys_filename = 'keys.txt'
+# keys.txt should contain two lines: 
+# 1. Base58 address of the XMR wallet starting with "4..."
+# 2. Hex string of the secret view key of the XMR wallet
+
+keys_filename = 'keys.txt' 
+
 keys = []
 with open(keys_filename, 'r') as fh:
     for line in fh:
@@ -62,6 +67,11 @@ def get_address_final(baseaddress, secret_vk, major, minor):
 
 
 
-print(get_address_final(baseaddress, secret_vk, 0, 6))
+print(get_address_final(baseaddress, secret_vk, 0, 11))
 
+
+print(base58.decode(baseaddress)[2:66])
+
+aco = b'holahola'
+print(hexlify(keccak_hash(aco)).decode())
 
