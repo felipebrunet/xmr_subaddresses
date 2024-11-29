@@ -3,6 +3,17 @@ from Crypto.Hash import keccak
 import nacl.bindings
 
 import monero.base58 as base58
+import os
+
+keys_filename = 'keys.txt'
+keys = []
+with open(keys_filename, 'r') as fh:
+    for line in fh:
+        keys.append(line.strip())
+
+
+baseaddress = keys[0]
+secret_vk = keys[1]
 
 edwards_add = nacl.bindings.crypto_core_ed25519_add
 inv = nacl.bindings.crypto_core_ed25519_scalar_invert
@@ -49,9 +60,8 @@ def get_address_final(baseaddress, secret_vk, major, minor):
 
 
 
-baseaddress = ''
-secret_vk = ''
 
-print(get_address_final(baseaddress, secret_vk, 0, 1))
+
+print(get_address_final(baseaddress, secret_vk, 0, 6))
 
 
